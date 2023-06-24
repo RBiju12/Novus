@@ -1,6 +1,7 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask_cors import CORS 
 import requests
+from bs4 import BeautifulSoup
 
 app = Flask(__name__)
 CORS(app) 
@@ -12,7 +13,7 @@ def index():
 
     return test
 
-@app.route("/<user>")
+@app.route("/Novus/<user>")
 def welcome(user):
     return f'Welcome {user}, to the Novus web app'
 
@@ -82,8 +83,8 @@ def open():
     else:
         return all_open_times
 
-#Local_Close
-@app.route("/localclose")
+#Current_Status
+@app.route("/currentstatus")
 def close():
     url = "https://www.alphavantage.co/query?function=MARKET_STATUS&apikey=XX9MEU6BO8D3SWYN"
     
@@ -129,8 +130,8 @@ def notes():
         return market_notes
     
 
-
-@app.route("/marketstatus")
+#Local Close
+@app.route("/localclose")
 def status():
     url = "https://www.alphavantage.co/query?function=MARKET_STATUS&apikey=XX9MEU6BO8D3SWYN"
     
@@ -140,11 +141,112 @@ def status():
 
     data = info.json()
     
-    all_close_times = []
+    local_closes = []
 
     for i in data["markets"]:
         open_close = i["local_close"]
+        local_closes.append(open_close)
 
+    if len(local_closes) == 0:
+        return "Data not found"
+    else:
+        return local_closes
+    
+
+@app.route("/scrape1")
+def stories():
+        url = "https://www.marketwatch.com/story/san-francisco-landlords-borrowed-9-billion-from-wall-street-now-they-want-big-tax-relief-from-a-struggling-city-32b87134?mod=us-markets"
+
+        page = requests.get(url)
+
+        soup = BeautifulSoup(page.text, 'html.parser')
+
+        paragraph = soup.find_all('p')[:12]
+        
+        new_scrape = []
+
+        for i in paragraph:
+            section = i.text
+            new_scrape.append(section)
+
+        if len(new_scrape) == 0:
+            return "Empty List"
+        
+        else:
+            return jsonify(new_scrape)
+    
+    
+
+@app.route("/scrape2")
+def article():  
+    
+        url = "https://www.marketwatch.com/story/why-the-10-year-treasury-yield-touching-3-85-could-mark-a-peak-for-the-rest-of-this-year-2d21ef72?mod=us-markets"
+
+        page = requests.get(url)
+
+        soup = BeautifulSoup(page.text,'html.parser')
+
+        paragraphs = soup.find_all('p')[:17]
+        
+        new_scrape2 = []
+
+        for i in paragraphs:
+            sections = i.text
+            new_scrape2.append(sections)
+
+        if len(new_scrape2) == 0:
+            return "Empty List"
+         
+        else:
+            return jsonify(new_scrape2)
+
+
+@app.route("/scrape3")
+def marketarticle():
+    url = "https://www.marketwatch.com/story/why-the-stock-market-shook-off-a-jekyll-and-hyde-fed-meeting-884d5ccc?mod=us-markets"
+
+    page = requests.get(url)
+
+    soup = BeautifulSoup(page.text,'html.parser')
+
+    stocktext = soup.find_all('p')[:12]
+
+    new_scrape3 = []
+
+    for i in stocktext:
+        rates = i.text
+        new_scrape3.append(rates)
+        
+    if len(new_scrape3) == 0:
+        return "Empty List"
+    else:
+        return jsonify(new_scrape3)
+
+
+@app.route("/scrape4")
+def marketarticles():
+    url = "https://www.marketwatch.com/story/why-blackrock-is-reportedly-close-to-applying-for-bitcoin-etf-despite-regulatory-pressure-on-crypto-38aa1df9?mod=us-markets"
+
+    page = requests.get(url)
+
+    soup = BeautifulSoup(page.text,'html.parser')
+
+    stocktexts = soup.find_all('p')[:13]
+
+    new_scrape4 =[]
+
+    for i in stocktexts:
+        sectionss = i.text
+        new_scrape4.append(sectionss)
+
+    if len(new_scrape4) == 0:
+        return "Empty List"
+
+    else:
+        return jsonify(new_scrape4)
+    
+    
+     
 
 if __name__ == '__main__':
     app.run(debug=True)
