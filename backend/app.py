@@ -2,9 +2,15 @@ from flask import Flask, jsonify
 from flask_cors import CORS 
 import requests
 from bs4 import BeautifulSoup
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
+import time
 
 app = Flask(__name__)
 CORS(app) 
+
 @app.route("/")
 def index():
     test = {
@@ -36,7 +42,7 @@ def market():
     if len(all_regions) == 0:
         return "Data not found"
     else:
-        return all_regions
+        return jsonify(all_regions)
 
 
     
@@ -59,7 +65,7 @@ def companes():
     if len(all_companies) == 0:
         return "Data not found"
     else:
-        return all_companies
+        return jsonify(all_companies)
     
 #Local open
 @app.route("/localopen")
@@ -81,7 +87,7 @@ def open():
     if len(all_open_times) == 0:
         return "Data not found"
     else:
-        return all_open_times
+        return jsonify(all_open_times)
 
 #Current_Status
 @app.route("/currentstatus")
@@ -103,7 +109,7 @@ def close():
     if len(all_status) == 0:
         return "Data not found"
     else:
-        return all_status
+        return jsonify(all_status)
 
 
 @app.route("/marketnotes")
@@ -119,15 +125,12 @@ def notes():
 
     for i in data["markets"]:
         urgent = i["notes"]
-        if(urgent == ""):
-            continue
-        else:
-            market_notes.append(urgent)
+        market_notes.append(urgent)
 
     if len(market_notes) == 0:
         return "Data not found"
     else:
-        return market_notes
+        return jsonify(market_notes)
     
 
 #Local Close
@@ -150,7 +153,7 @@ def status():
     if len(local_closes) == 0:
         return "Data not found"
     else:
-        return local_closes
+        return jsonify(local_closes)
     
 
 @app.route("/scrape1")
@@ -245,8 +248,76 @@ def marketarticles():
     else:
         return jsonify(new_scrape4)
     
-    
-     
 
+@app.route('/chartdata1ticketer')
+def ticketer():
+    url = 'https://www.alphavantage.co/query?function=TOP_GAINERS_LOSERS&apikey=XX9MEU6BO8D3SWYN'
+
+    page = requests.get(url)
+
+    data = page.json()
+
+    all_ticketers = []
+
+    for name in data["top_gainers"]:
+        company = name["ticker"]
+        all_ticketers.append(company)
+
+    if len(all_ticketers) == 0:
+        return "Empty List" 
+    else:
+        return jsonify(all_ticketers)
+
+    
+@app.route('/chartdata2')
+def datas():
+     url = 'https://www.alphavantage.co/query?function=TOP_GAINERS_LOSERS&apikey=XX9MEU6BO8D3SWYN'
+
+     page = requests.get(url)
+
+     data = page.json()
+
+     all_change = []
+
+     for name in data["top_gainers"]:
+        company = name["change_amount"]
+        all_change.append(company)
+
+     if len(all_change) == 0:
+        return "Empty List"
+     else:
+        return jsonify(all_change)
+     
+@app.route('/selenbutton')
+def selen():
+    try:
+        driver_service = Service(executable_path='C:\Workspace\chromedriver.exe')
+
+        coptions = webdriver.ChromeOptions()
+
+        driver = webdriver.Chrome(service=driver_service, options=coptions)
+
+        url = "https://www.google.com/"
+
+        driver.get(url)
+
+        search_box = driver.find_element(By.CLASS_NAME, 'gLFyf')
+
+        search_box.send_keys("Learn more about Stocks")
+
+        search_box.submit()
+    
+        time.sleep(45)
+
+        driver.quit()
+        
+    except Exception as err:
+        return f"Error occured with selenium {str(err)}"
+
+@app.errorhandler(404)
+def error(e):
+    print("Error", e)
+    return "Error wrong route"
+     
 if __name__ == '__main__':
     app.run(debug=True)
