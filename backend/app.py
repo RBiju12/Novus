@@ -36,7 +36,7 @@ def market():
     if len(all_regions) == 0:
         return "Data not found"
     else:
-        return all_regions
+        return jsonify(all_regions)
 
 
     
@@ -59,7 +59,7 @@ def companes():
     if len(all_companies) == 0:
         return "Data not found"
     else:
-        return all_companies
+        return jsonify(all_companies)
     
 #Local open
 @app.route("/localopen")
@@ -81,7 +81,7 @@ def open():
     if len(all_open_times) == 0:
         return "Data not found"
     else:
-        return all_open_times
+        return jsonify(all_open_times)
 
 #Current_Status
 @app.route("/currentstatus")
@@ -103,7 +103,7 @@ def close():
     if len(all_status) == 0:
         return "Data not found"
     else:
-        return all_status
+        return jsonify(all_status)
 
 
 @app.route("/marketnotes")
@@ -127,7 +127,7 @@ def notes():
     if len(market_notes) == 0:
         return "Data not found"
     else:
-        return market_notes
+        return jsonify(market_notes)
     
 
 #Local Close
@@ -150,7 +150,7 @@ def status():
     if len(local_closes) == 0:
         return "Data not found"
     else:
-        return local_closes
+        return jsonify(local_closes)
     
 
 @app.route("/scrape1")
@@ -246,7 +246,6 @@ def marketarticles():
         return jsonify(new_scrape4)
     
     
-     
 
 if __name__ == '__main__':
     app.run(debug=True)
