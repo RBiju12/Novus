@@ -9,14 +9,15 @@ from selenium.webdriver.chrome.options import Options
 import time
 
 app = Flask(__name__)
-CORS(app) 
+CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+
 @app.route("/")
 def index():
-    test = {
-    "Info": "Welcome to the Novus Website!"
+    data = {
+    "info": "Welcome to the Novus Website!"
     }
 
-    return test
+    return jsonify(data)
 
 @app.route("/Novus/<user>")
 def welcome(user):
