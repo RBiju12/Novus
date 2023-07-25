@@ -309,6 +309,8 @@ def automate():
         driver.quit()
     except Exception as e:
         return f'Error is {e}'
+    
+    
 @app.errorhandler(404)
 def handleerror(e):
     print("Error", {e})
