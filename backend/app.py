@@ -2,6 +2,11 @@ from flask import Flask, jsonify
 from flask_cors import CORS 
 import requests
 from bs4 import BeautifulSoup
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
+import time
 
 app = Flask(__name__)
 CORS(app) 
@@ -119,10 +124,7 @@ def notes():
 
     for i in data["markets"]:
         urgent = i["notes"]
-        if(urgent == ""):
-            continue
-        else:
-            market_notes.append(urgent)
+        market_notes.append(urgent)
 
     if len(market_notes) == 0:
         return "Data not found"
@@ -245,6 +247,72 @@ def marketarticles():
     else:
         return jsonify(new_scrape4)
     
+@app.route('/graphdata1')
+def graph():
+    url = "https://www.alphavantage.co/query?function=TOP_GAINERS_LOSERS&apikey=XX9MEU6BO8D3SWYN"
+
+    page = requests.get(url)
+
+    data = page.json()
+
+    top_comp = []
+
+    for i in data["top_gainers"]:
+        info = i["price"]
+        top_comp.append(info)
+    
+    if len(top_comp) == 0:
+        return "Empty List"
+    
+    else:
+        return jsonify(top_comp)
+    
+@app.route('/graphdata2')
+def companies():
+    url = "https://www.alphavantage.co/query?function=TOP_GAINERS_LOSERS&apikey=XX9MEU6BO8D3SWYN"
+
+    page = requests.get(url)
+
+    data = page.json()
+
+    tickers = []
+
+    for i in data["top_gainers"]:
+        info = i["ticker"]
+        tickers.append(info)
+    
+    if len(tickers) == 0:
+        return "Empty List"
+    
+    else:
+        return jsonify(tickers)
+    
+@app.route('/automate')
+def automate():
+    try:
+        driver_service = Service(executable_path='C:\Workspace\chromedriver.exe')
+        coptions = webdriver.ChromeOptions()
+        driver = webdriver.Chrome(service=driver_service, options=coptions)
+
+        url = "https://www.google.com/"
+
+        driver.get(url)
+
+        search_box = driver.find_element(By.CLASS_NAME, 'gLFyf')
+
+        search_box.send_keys('Learn more about Stocks')
+
+        search_box.submit()
+
+        time.sleep(30)
+
+        driver.quit()
+    except Exception as e:
+        return f'Error is {e}'
+@app.errorhandler(404)
+def handleerror(e):
+    print("Error", {e})
+    return "Bad Gateaway", 400
     
 
 if __name__ == '__main__':
