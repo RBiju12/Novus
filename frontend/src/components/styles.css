@@ -1,0 +1,103 @@
+/* Reset default margins and paddings for the whole page */
+body, h1, p, ul, li {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Style for the navbar */
+  .navbar {
+    background-color: #B7AFAF; /* Change this to your desired background color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px; /* Adjust the height as needed */
+  }
+  
+  /* Style for the navbar links */
+  .navbar ul {
+    list-style: none;
+  }
+  
+  .navbar li {
+    display: inline-block;
+    margin: 0 75px; /* Adjust the spacing between navbar items */
+  }
+  
+  .navbar li a {
+    color: white; /* Change this to your desired text color */
+    text-decoration: none;
+    padding: 10px 20px; /* Adjust the padding as needed */
+  }
+  
+  .navbar li a:hover {
+    background-color: #555; /* Change this to your desired hover background color */
+  }
+  
+  /* Optional: To shift the navbar to the top of the page */
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  .contact{
+    height: 22px;
+    width: 60px;
+  }
+  
+  .navbarlogo{
+    width: 84px;
+    height: 39px;
+  }
+
+
+  .footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #B7AFAF; 
+    color: #fff; 
+    padding: 2px; 
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); 
+  }
+  
+  .footer-content {
+    max-width: 1200px; 
+    margin: 0 auto; 
+  }
+  
+  .footheader {
+    margin-top: 10px;
+    font-size: 18px;
+  }
+  
+  .footer ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer ul li {
+    margin-bottom: 10px;
+  }
+  
+  .footer ul li a {
+    color: #fff; /* Replace with desired link color for the footer */
+    text-decoration: none;
+  }
+  
+  .footer ul li a:hover {
+    text-decoration: underline; /* Add an underline on hover for links */
+  }
+
+  .footmiddle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 1px;
+  }
+
+  .automatebutton{
+    margin-bottom: 5px;
+    float: right;
+  }

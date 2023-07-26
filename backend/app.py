@@ -291,7 +291,7 @@ def companies():
 @app.route('/automate')
 def automate():
     try:
-        driver_service = Service(executable_path='C:\Workspace\chromedriver.exe')
+        driver_service = Service(executable_path='C:\novusdriver\chromedriver-win64\chromedriver.exe')
         coptions = webdriver.ChromeOptions()
         driver = webdriver.Chrome(service=driver_service, options=coptions)
 

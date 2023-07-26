@@ -1,5 +1,6 @@
 import {Routes, Route } from "react-router-dom";
 import Navbar from "./components/navbar"
+import Footer from "./components/footer"
 import Novus from "./pages/Novus"
 import Markets from "./pages/Markets"
 import Articles from "./pages/Articles"
@@ -18,6 +19,7 @@ function App() {
           <Route path='/articles' element={<Articles />}  />
           <Route path='/contact' element={<Contact />}  /> 
       </Routes>
+      <Footer/>
       </>
   );
 }

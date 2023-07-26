@@ -29,4 +29,4 @@ const Novus = () => {
     )
 }
 
-export default Novus
+export default Novus;
