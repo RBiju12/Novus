@@ -1,6 +1,17 @@
+import './Novus.css'
+
 const Markets = () => {
     return(
-        <h1>Welcome to Markets Page</h1>
+        <>
+        <h1 className='markethead'>Welcome to Markets Page</h1>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        </>
     )
 }
 

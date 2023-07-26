@@ -13,7 +13,7 @@ const Footer = () => {
             console.error('Error fetching endpoint', err)
         })
         setComplete(true)
-        console.log(response.data)
+        console.log(response)
     }
 
 
@@ -25,7 +25,6 @@ const Footer = () => {
     <footer className='footer'>
       <div className='footer-content'>
         <h1 className='footheader'>Resources:</h1>
-        
         <ul>
           <li>
             <a href="https://site.financialmodelingprep.com/education/best-stock-research-websites">Best Stock Websites</a>

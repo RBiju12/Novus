@@ -5,6 +5,7 @@ import './styles.css'; // Import the CSS file containing the styles
 
 function Navbar() {
   return (
+    <div className='main-content'>
     <header>
       <nav className="navbar">
         <ul>
@@ -28,6 +29,7 @@ function Navbar() {
         </ul>
       </nav>
     </header>
+    </div>
   );
 }
 
