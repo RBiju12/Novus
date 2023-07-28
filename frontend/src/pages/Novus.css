@@ -36,3 +36,26 @@ h1{
 .markethead{
     font-size: 50px;
 }
+
+.articlecontain{
+    background-color: #D7FBEC;
+    position: relative;
+}
+
+.articleright{
+    float: right;
+}
+
+.articlefirst{
+    margin-top: -94px;
+    margin-left: 0px;
+}
+
+.articlelast{
+  margin-top: -470px; /* Add the desired top spacing */
+  margin-left: 1120px;
+}
+
+.articlehead{
+    text-align: center;
+}
