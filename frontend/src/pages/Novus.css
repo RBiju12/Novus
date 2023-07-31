@@ -59,3 +59,37 @@ h1{
 .articlehead{
     text-align: center;
 }
+
+
+.contactpage{
+    text-align: center;
+    background-color: #D7FBEC;
+}
+
+
+.email{
+    font-weight: bold;
+    background-color: #007bff;
+    color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  margin-top: 20px;
+}
+
+.regions{
+    text-align: center;
+}
+
+.close{
+    margin-top: -930px;
+    float:right;
+}
+
+.centertable{
+    margin: 0 auto;
+}
+
+.markets{
+    background-color: #D7FBEC;
+}

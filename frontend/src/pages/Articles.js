@@ -92,7 +92,7 @@ const Articles = () => {
     return(
         <>
         <div className='articlecontain'>
-        <h1 className='articlehead'>Articles</h1>
+        <h1 className='articlehead'>Articles:</h1>
         <ArticleCard article={articledata3} className='articleright'/>
         <ArticleCard article={articledata} className='articlefirst' />
         <br></br>

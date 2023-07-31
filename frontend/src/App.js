@@ -6,8 +6,30 @@ import Markets from "./pages/Markets"
 import Articles from "./pages/Articles"
 import Contact from "./pages/Contact"
 import Progression from "./pages/Progression"
+import React, {useState, useEffect} from 'react'
+import axios from 'axios'
 
 function App() {
+
+  const [screen, setScreen] = useState('')
+
+  const fetchHome = React.useCallback(async() => {
+    try{
+    const response = await axios.get('http://localhost:5000/')
+    console.log(response)
+    setScreen(JSON.stringify(response.data.info))
+    alert(JSON.stringify(response.data.info))
+    console.log(screen)
+  }
+  catch(err){
+    console.log(`Error is: ${err}`)
+  }
+  }, [screen])
+
+
+  useEffect(() => {
+    fetchHome();
+  }, [fetchHome])
 
   return (
     <>

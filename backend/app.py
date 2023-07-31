@@ -9,7 +9,7 @@ from selenium.webdriver.chrome.options import Options
 import time
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+CORS(app)
 
 @app.route("/")
 def index():
@@ -23,137 +23,19 @@ def index():
 def welcome(user):
     return f'Welcome {user}, to the Novus web app'
 
-@app.route("/marketregions")
-def market():
-    url = "https://www.alphavantage.co/query?function=MARKET_STATUS&apikey=XX9MEU6BO8D3SWYN"
-
-    info = requests.get(url)
-
-    print("Page Status", info.status_code)
-
-    data = info.json()
-
-    all_regions = []
-
-    for i in data["markets"]:
-        countries = i["region"]
-        all_regions.append(countries)
-
-    if len(all_regions) == 0:
-        return "Data not found"
-    else:
-        return jsonify(all_regions)
-
-
-    
-@app.route("/marketcompanies")
-def companes():
-    url = "https://www.alphavantage.co/query?function=MARKET_STATUS&apikey=XX9MEU6BO8D3SWYN"
-
-    info = requests.get(url)
-
-    print("Page Status", info.status_code)
-
-    data = info.json()
-    
-    all_companies = []
-
-    for j in data["markets"]:
-        companytype = j["primary_exchanges"]
-        all_companies.append(companytype)
-
-    if len(all_companies) == 0:
-        return "Data not found"
-    else:
-        return jsonify(all_companies)
-    
-#Local open
-@app.route("/localopen")
-def open():
-    url = "https://www.alphavantage.co/query?function=MARKET_STATUS&apikey=XX9MEU6BO8D3SWYN"
-    
-    info = requests.get(url)
-
-    print("Page Status", info.status_code)
-
-    data = info.json()
-    
-    all_open_times = []
-
-    for i in data["markets"]:
-        open_time = i["local_open"]
-        all_open_times.append(open_time)
-        
-    if len(all_open_times) == 0:
-        return "Data not found"
-    else:
-        return jsonify(all_open_times)
-
-#Current_Status
-@app.route("/currentstatus")
-def close():
-    url = "https://www.alphavantage.co/query?function=MARKET_STATUS&apikey=XX9MEU6BO8D3SWYN"
-    
-    info = requests.get(url)
-
-    print("Page Status", info.status_code)
-
-    data = info.json()
-    
-    all_status = []
-
-    for i in data["markets"]:
-        status = i["current_status"]
-        all_status.append(status)
-        
-    if len(all_status) == 0:
-        return "Data not found"
-    else:
-        return jsonify(all_status)
-
-
-@app.route("/marketnotes")
-def notes():
-    url = "https://www.alphavantage.co/query?function=MARKET_STATUS&apikey=XX9MEU6BO8D3SWYN"
-    
-    info = requests.get(url)
-
-    print("Page Status", info.status_code)
-
-    data = info.json()
-    market_notes = []
-
-    for i in data["markets"]:
-        urgent = i["notes"]
-        market_notes.append(urgent)
-
-    if len(market_notes) == 0:
-        return "Data not found"
-    else:
-        return jsonify(market_notes)
-    
 
 #Local Close
-@app.route("/localclose")
+@app.route("/apidata")
 def status():
-    url = "https://www.alphavantage.co/query?function=MARKET_STATUS&apikey=XX9MEU6BO8D3SWYN"
+    url = "https://www.alphavantage.co/query?function=MARKET_STATUS&apikey=MB1K8ATOZKJGFKHM"
     
     info = requests.get(url)
 
     print("Page Status", info.status_code)
 
     data = info.json()
-    
-    local_closes = []
 
-    for i in data["markets"]:
-        open_close = i["local_close"]
-        local_closes.append(open_close)
-
-    if len(local_closes) == 0:
-        return "Data not found"
-    else:
-        return jsonify(local_closes)
+    return jsonify(data)
     
 
 @app.route("/scrape1")
@@ -250,7 +132,7 @@ def marketarticles():
     
 @app.route('/graphdata1')
 def graph():
-    url = "https://www.alphavantage.co/query?function=TOP_GAINERS_LOSERS&apikey=XX9MEU6BO8D3SWYN"
+    url = "https://www.alphavantage.co/query?function=TOP_GAINERS_LOSERS&apikey=MB1K8ATOZKJGFKHM"
 
     page = requests.get(url)
 
@@ -270,7 +152,7 @@ def graph():
     
 @app.route('/graphdata2')
 def companies():
-    url = "https://www.alphavantage.co/query?function=TOP_GAINERS_LOSERS&apikey=XX9MEU6BO8D3SWYN"
+    url = "https://www.alphavantage.co/query?function=TOP_GAINERS_LOSERS&apikey=MB1K8ATOZKJGFKHM"
 
     page = requests.get(url)
 
