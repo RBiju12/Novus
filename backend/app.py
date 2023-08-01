@@ -7,6 +7,9 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 import time
+import openai
+
+openai.api_key = ""
 
 app = Flask(__name__)
 CORS(app)
@@ -192,6 +195,27 @@ def automate():
         driver.quit()
     except Exception as e:
         return f'Error is {e}'
+    
+@app.route('/chatbot')
+def chatbot():
+    try:
+        input_message = [
+        {"role": "system", "content": "What are some good stock companies to invest in?"}
+        ]
+
+        response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=input_message
+        )
+
+        generator = response['choices'][0]['message']['content']
+
+        print(generator)
+
+        return jsonify({"data": generator})
+    except Exception as e:
+        return jsonify({"error": str(e)})
+
     
     
 @app.errorhandler(404)

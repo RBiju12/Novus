@@ -4,6 +4,20 @@ import axios from 'axios';
 
 const Markets = () => {
   const [marketData, setMarketData] = useState([]);
+  const [info, setInfo] = useState('')
+
+
+  const fetchChatBot = React.useCallback(async() => {
+    try{
+      const res = await axios.get('http://localhost:5000/chatbot');
+      console.log('Response', res.data);
+      setInfo(res.data)
+      console.log(info)
+    }
+    catch(err){
+      console.error(err)
+    }
+  }, [info])
 
   const fetchData = React.useCallback(async () => {
     try {
@@ -17,7 +31,8 @@ const Markets = () => {
 
   useEffect(() => {
     fetchData();
-  }, [fetchData]);
+    fetchChatBot();
+  }, [fetchData, fetchChatBot]);
 
   console.log('Market Data:', marketData); 
 
@@ -57,7 +72,10 @@ const Markets = () => {
         <br />
         <br />
         <br />
-        <br />
+        <div className='center'>
+        <button onClick={fetchChatBot} className='chatbot'>Click to view Top 5 stocks to invest</button>
+        <p>{info.data}</p>
+        </div>
         <br />
       </div>
     </>
