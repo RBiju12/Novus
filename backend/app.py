@@ -20,7 +20,7 @@ def index():
     return send_from_directory(app.static_folder, "index.html")
 
 @app.route("/welcome")
-def welcome():
+def hello():
     data = {
     "info": "Welcome to the Novus Website!"
     }
