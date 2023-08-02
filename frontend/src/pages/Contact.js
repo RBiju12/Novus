@@ -42,7 +42,7 @@ const Contact = () => {
     return(
         <>
         <div className='contactpage'>
-            <h1>Contact</h1>
+            <h1>Contact:</h1>
             <br />
             <p>Hi, my name is Rishan, and I'm a passionate web app developer with a focus on stock analysis. 
             Through my expertise in web development and my fascination with the financial markets, I'm creating a user-centric platform that 

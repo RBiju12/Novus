@@ -109,3 +109,13 @@ header {
   margin-top: -50px;
   float: right;
 }
+
+.chartmiddle{
+  text-align: center;
+  font-size: 25px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.parent{
+  background-color: #D7FBEC;
+}

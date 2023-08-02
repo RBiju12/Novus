@@ -15,7 +15,7 @@ function App() {
 
   const fetchHome = React.useCallback(async() => {
     try{
-    const response = await axios.get('http://localhost:5000/')
+    const response = await axios.get('http://localhost:5000/welcome')
     console.log(response)
     setScreen(JSON.stringify(response.data.info))
     alert(JSON.stringify(response.data.info))

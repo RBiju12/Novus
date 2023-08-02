@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, send_from_directory
 from flask_cors import CORS 
 import requests
 from bs4 import BeautifulSoup
@@ -9,13 +9,18 @@ from selenium.webdriver.chrome.options import Options
 import time
 import openai
 
-openai.api_key = ""
+openai.api_key = "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"
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../frontend/build', static_url_path='/')
 CORS(app)
+
 
 @app.route("/")
 def index():
+    return send_from_directory(app.static_folder, "index.html")
+
+@app.route("/welcome")
+def welcome():
     data = {
     "info": "Welcome to the Novus Website!"
     }
@@ -151,7 +156,7 @@ def graph():
         return "Empty List"
     
     else:
-        return jsonify(top_comp)
+        return jsonify({"companies":top_comp})
     
 @app.route('/graphdata2')
 def companies():
@@ -172,6 +177,66 @@ def companies():
     
     else:
         return jsonify(tickers)
+    
+@app.route('/graphdata3')
+def change():
+    url = "https://www.alphavantage.co/query?function=TOP_GAINERS_LOSERS&apikey=MB1K8ATOZKJGFKHM"
+
+    page = requests.get(url)
+
+    data = page.json()
+
+    change_data = []
+
+    for i in data["top_gainers"]:
+        amount = i["change_amount"]
+        change_data.append(amount)
+    
+    if len(change_data) == 0:
+        return "Empty List"
+    
+    else:
+        return jsonify({"change":change_data})
+    
+@app.route('/graphdata4')
+def percentage():
+    url = "https://www.alphavantage.co/query?function=TOP_GAINERS_LOSERS&apikey=MB1K8ATOZKJGFKHM"
+
+    page = requests.get(url)
+
+    data = page.json()
+
+    change_per = []
+
+    for i in data["top_gainers"]:
+        amount = i["change_percentage"]
+        change_per.append(amount)
+    
+    if len(change_per) == 0:
+        return "Empty List"
+    
+    else:
+        return jsonify({"percentage":change_per})
+    
+@app.route('/graphdata5')
+def volumes():
+    url = "https://www.alphavantage.co/query?function=TOP_GAINERS_LOSERS&apikey=MB1K8ATOZKJGFKHM"
+
+    page = requests.get(url)
+
+    data = page.json()
+
+    vol = []
+
+    for i in data["top_gainers"]:
+        amount = i["volume"]
+        vol.append(amount)
+    
+    if len(vol) == 0:
+        return "Empty List"
+    
+    else:
+        return jsonify({"volume":vol})
     
 @app.route('/automate')
 def automate():
@@ -211,6 +276,8 @@ def chatbot():
         generator = response['choices'][0]['message']['content']
 
         print(generator)
+
+        time.sleep(3)
 
         return jsonify({"data": generator})
     except Exception as e:

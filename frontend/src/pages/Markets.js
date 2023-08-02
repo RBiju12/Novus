@@ -73,7 +73,7 @@ const Markets = () => {
         <br />
         <br />
         <div className='center'>
-        <button onClick={fetchChatBot} className='chatbot'>Click to view Top 5 stocks to invest</button>
+        <button onClick={fetchChatBot} className='chatbot'>View Financial Advice from chatbot</button>
         <p>{info.data}</p>
         </div>
         <br />

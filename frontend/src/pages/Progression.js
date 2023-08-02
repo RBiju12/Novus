@@ -1,7 +1,14 @@
+import StockSelect from '../components/Stockselect'
+import './Novus.css'
 const Progression = () => {
     return(
-        <h1>Welcome to Progression Page</h1>
+        <>
+        <div className='progression'>
+        <h1>Progression:</h1>
+        <StockSelect />
+        </div>
+        </>
     )
 }
 
-export default Progression
+export default Progression;
