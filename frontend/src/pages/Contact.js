@@ -1,5 +1,10 @@
 import React from 'react'
 import {useState, useEffect} from 'react'
+import {Button} from 'react-bootstrap'
+import {TextField} from '@mui/material'
+import {Card} from 'react-bootstrap'
+import './Novus.css'
+
 const Contact = () => {
 
     const [email, setEmail] = useState('')
@@ -49,37 +54,40 @@ const Contact = () => {
             empowers investors to make informed decisions and navigate the complexities of stock analysis with ease. Join me on this exciting 
             journey as we explore the world of stocks together! Feel free to fill out the contact page to recieve updates on stock changes.</p>
             <br />
-            <button onClick={fetchEmail} className='email'>Click to view my email</button>
+            <Button onClick={fetchEmail} className='email'>Click to view my email</Button>
             {pressed && <p>{email}</p>}
             <br />
+            <br />
+        <Card bg='info' style={{top: '20%', left: '50%', transform: 'translate(-50%, -2%)', width: '700px'}}>
         <div className='forms'>
             <br />
             <br />
             <br />
-            <h1>Sign up to recieve alerts:</h1>
+            <Card.Title>Sign up to recieve alerts:</Card.Title>
             <br />
             <br />
             <form>
-                <label for="first-name">First Name:</label>
-                <input type='text' className='name' value={firstname} onChange={(e) => setFirstName(e.target.value)} />
+                <Card.Title>First Name:</Card.Title>
+                <TextField id="standard-basic" label="Enter your first name" variant="standard" type='text'  value={firstname} onChange={(e) => setFirstName(e.target.value)} />
                 <br />
                 <br />
-                <label for="last-name">Last Name:</label>
-                <input type='text' className='lastname' value={lastname} onChange={(e) => setLastName(e.target.value)} />
+                <Card.Title>Last Name:</Card.Title>
+                <TextField id="standard-basic" label="Enter your last name" variant="standard" type='text' value={lastname} onChange={(e) => setLastName(e.target.value)} />
                 <br />
                 <br />
-                <label for="last-name">Email Address:</label>
-                <input type='text' className='textfield' value={emails} onChange={(e) => setEmails(e.target.value)}/>
+                <Card.Title>Email Address:</Card.Title>
+                <TextField id="standard-basic" label="Enter your email address" variant="standard" type='text' value={emails} onChange={(e) => setEmails(e.target.value)}/>
                 <br />
                 <br />
                 <br />
-                <button onClick={submitvalidate} type='submit' className='contact'>Submit</button>
+                <Button variant='primary' onClick={submitvalidate} type='submit' className='contact'>Submit</Button>
                 <br />
                 <br />
                 <br />
                 <br />
             </form>
         </div>
+        </Card>
         </div>
         </>
 

@@ -2,6 +2,9 @@ import React from 'react';
 import './styles.css';
 import {useState} from 'react'
 import axios from 'axios'
+import {Button} from 'react-bootstrap'
+import "bootstrap/dist/css/bootstrap.min.css"
+
 
 const Footer = () => {
 
@@ -14,6 +17,7 @@ const Footer = () => {
         })
         setComplete(true)
         console.log(response)
+        console.log(complete)
     }
 
 
@@ -40,7 +44,9 @@ const Footer = () => {
         </h1>
       </div>
       <div className='automatebutton'>
-        <button className='selenium' onClick={fetchEndpoint}>Learn more about Stocks</button>
+        <Button variant='primary' onClick={fetchEndpoint}>
+          Learn more about Stocks
+          </Button>
       </div>
     </footer>
   );

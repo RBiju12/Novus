@@ -1,6 +1,8 @@
 import Home from './Home.png'
 import './Novus.css'
+import {Card} from 'react-bootstrap'
 const Novus = () => {
+
     //const [data, setData] = useState([])
 
     // useEffect(() => {
@@ -23,17 +25,28 @@ const Novus = () => {
                 <div className='novushome'>
                 <img src={Home} className='novushome' alt='stockimg' />
                 </div>
+                <br />
 
-                <div className='mission'>
-                    <h1>Mission Statement:</h1>
+                <Card bg='info' style={{ width: '80rem' }} className='mission'>
+                    <Card.Title>Mission Statement:</Card.Title>
                     <br />
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                    <Card.Body>
+                    <Card.Text>
+                    I am passionate about developing a stock market application that prioritizes analysis and statistics to reveal essential insights in earnings per day. By offering valuable data-driven analyses and concise reports, 
+                    the application will empower investors with informed decision-making tools. 
+                    It aims to simplify the complexities of the stock market, making it accessible to both seasoned investors and newcomers. 
+                    The ultimate goal is to foster a community of informed investors and elevate financial literacy. 
+                    Through continuous updates and user feedback, the application will remain a cutting-edge tool in stock market analysis and insights, 
+                    ensuring a more secure and prosperous future for users.
+                    </Card.Text>
+                    </Card.Body>
                     <br></br>
                     <br></br>
                     <br></br>
                     <br></br>
                     <br></br>
-                </div>
+                    <br></br>
+                </Card>
             </div>
         </>
     )

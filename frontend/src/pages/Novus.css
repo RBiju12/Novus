@@ -27,6 +27,7 @@ width: 100%;
 .mission{
     border-style: dotted;
     border-color: rgb(0, 0, 0);
+    text-align: center;
 }
 
 h1{
@@ -100,4 +101,17 @@ h1{
 
 .progression{
     background-color: #D7FBEC;
+}
+
+.chatbot{
+    width: 270px;
+}
+
+.contact{
+    width:90px;
+    height:50px;
+}
+
+.address{
+    text-align: center;
 }

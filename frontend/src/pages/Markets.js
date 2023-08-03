@@ -1,6 +1,9 @@
 import './Novus.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import {Button} from 'react-bootstrap'
+import {Card} from 'react-bootstrap'
+import {Table} from 'react-bootstrap';
 
 const Markets = () => {
   const [marketData, setMarketData] = useState([]);
@@ -34,6 +37,10 @@ const Markets = () => {
     fetchChatBot();
   }, [fetchData, fetchChatBot]);
 
+  const stopChatBot = () => {
+    setInfo('Chat Bot Closed')
+  }
+
   console.log('Market Data:', marketData); 
 
   return (
@@ -45,7 +52,7 @@ const Markets = () => {
         {marketData.length === 0 ? (
           <p>Loading...</p>
         ) : (
-          <table className='centertable'>
+          <Table className='centertable' striped bordered hover variant="dark">
             <thead>
               <tr>
                 <th>Market Type</th>
@@ -66,15 +73,22 @@ const Markets = () => {
                 </tr>
               ))}
             </tbody>
-          </table>
+          </Table>
         )}
         <br />
         <br />
         <br />
         <br />
         <div className='center'>
-        <button onClick={fetchChatBot} className='chatbot'>View Financial Advice from chatbot</button>
+          <Card bg='info'>
+            <Card.Title>View Financial Advice from chatbot</Card.Title>
+        <Card.Body>
+        <Button onClick={fetchChatBot} className='chatbot'>Click to Interact</Button>
+        <br />
         <p>{info.data}</p>
+        <Button variant='danger' onClick={stopChatBot}>Click to Stop</Button>
+        </Card.Body>
+        </Card>
         </div>
         <br />
       </div>
