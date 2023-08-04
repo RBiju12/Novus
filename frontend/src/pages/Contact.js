@@ -22,6 +22,8 @@ const Contact = () => {
         setEmails('rishanbiju@gmail.com')
     }
 
+    //Displays email and after 30 seconds it disappears
+
     useEffect(() => {
         const timer = setTimeout(() => {
             setPressed(false)
@@ -30,13 +32,14 @@ const Contact = () => {
         return () => setTimeout(timer)
     }, [])
 
-
-    const submittoDatabase = async(e) => {
+    //Fetches DB endpoint and submits post request to sent to PostgreSQL database
+    const submittoDatabase = async() => {
         try{
         const response = await axios.post('http://localhost:5000/db', {
             firstname: firstname,
             lastname: lastname, 
             email: email,
+            //handles state to put into db
         })
         console.log(response.data.message);
     }catch(err){
@@ -45,6 +48,8 @@ const Contact = () => {
 
     }
 
+
+    //Error handling to form to validate if the input is correct
     const submitvalidate = () => {
         if(email.trim().length === 0 || firstname.trim().length === 0 || lastname.trim().length === 0){
             alert('Please enter all the fields!')

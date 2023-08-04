@@ -3,7 +3,7 @@ import './Novus.css'
 import {Card} from 'react-bootstrap'
 import {useEffect} from 'react'
 const Novus = () => {
-
+//Home Page with simple gretting message
     useEffect(() => {
         alert('Welcome to Novus!')
     }, [])

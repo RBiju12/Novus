@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 
 const articlecard = ({article, className}) => {
     const {title, content, imageUrl} = article;
-
+    //Destructured objects that store many fields that I access from this component to put data into using the Card Component
 
     return(
         <>

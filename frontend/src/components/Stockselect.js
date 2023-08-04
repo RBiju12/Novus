@@ -4,6 +4,8 @@ import ReactApexChart from 'react-apexcharts'
 import './styles.css'
 
 const Stockselect = ({id, className}) => {
+
+    //All of my states that hold the data for the x-axis and y-axis 
     const [options, setOptions] = useState({
         chart: {
             id: 'barchart'
@@ -38,7 +40,7 @@ const Stockselect = ({id, className}) => {
     ]
 
     )
-
+    //Grabs the x-axis data
     const fetchTicketer = async() => {
         const response = await axios.get('http://localhost:5000/graphdata2')
         console.log(response.data)
@@ -50,6 +52,7 @@ const Stockselect = ({id, className}) => {
             colors: ['#F44336', '#0000FF'],
         })
     }
+    //Grabs the y-axis datasets
 
     const fetchInfo = async() => {
         const response = await axios.get('http://localhost:5000/graphdata1')
@@ -68,6 +71,7 @@ const Stockselect = ({id, className}) => {
         ])
     }
 
+    //grabs more y-datasets
     const fetchDataPoints = async() => {
         const response = await axios.get('http://localhost:5000/graphdata4')
         console.log(response.data.percentage)
@@ -91,6 +95,7 @@ const Stockselect = ({id, className}) => {
         fetchDataPoints()
     }, [])
 
+    //Displays Data and puts it into the ReactApexCharts component to display a bar chart
 
     return(
         <div className='parent'>

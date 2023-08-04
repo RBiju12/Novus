@@ -10,6 +10,8 @@ const Articles = () => {
     const [text3, setText3] = useState('')
     const [text4, setText4] = useState('')
 
+
+    //Extracted data from backend endpoint 1 and grabbed text to display in Card Component
     const fetchArticle1 = async() => {
         try{
         const response = await axios.get('http://localhost:5000/scrape1')
@@ -21,6 +23,8 @@ const Articles = () => {
             console.error(err)
         }
     }
+
+    //Extracted data from backend endpoint 2 and grabbed text to display in Card Component
 
     const fetchArticle2 = async() => {
         try{
@@ -34,6 +38,7 @@ const Articles = () => {
         }
     }
 
+    //Extracted data from backend endpoint 3 and grabbed text to display in Card Component
     const fetchArticle3 = async() => {
         try{
         const response = await axios.get('http://localhost:5000/scrape3')
@@ -45,6 +50,8 @@ const Articles = () => {
             console.error(err)
         }
     }
+
+    //Extracted data from backend endpoint 4 and grabbed text to display in Card Component
 
     const fetchArticle4 = async() => {
         try{
@@ -88,6 +95,8 @@ const Articles = () => {
         content: text4,
         imageUrl: 'https://www.bankrate.com/2020/08/24165602/what-is-bitcoin.jpeg?auto=webp&optimize=high&crop=16:9'
     }
+
+    //Card Component that displays the data - 4 Cards
 
     return(
         <>

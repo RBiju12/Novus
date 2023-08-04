@@ -4,6 +4,8 @@ import logo from './novuslogo.png'
 import './styles.css'; // Import the CSS file containing the styles
 
 function Navbar() {
+
+  //Basic NavBar component that displays all of my elements
   return (
     <div className='main-content'>
     <header>

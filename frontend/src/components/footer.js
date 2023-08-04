@@ -5,7 +5,6 @@ import axios from 'axios'
 import {Button} from 'react-bootstrap'
 import "bootstrap/dist/css/bootstrap.min.css"
 
-
 const Footer = () => {
 
     const [complete, setComplete] = useState(false)
@@ -19,6 +18,8 @@ const Footer = () => {
         console.log(response)
         console.log(complete)
     }
+
+    //Footer component that fetches my selenium endpoint and allows for automation of stock information/data
 
 
     const year = new Date().getFullYear();

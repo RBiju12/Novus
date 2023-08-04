@@ -1,6 +1,8 @@
 import StockSelect from '../components/Stockselect'
 import './Novus.css'
 const Progression = () => {
+
+    //Renders StockSelect Component
     return(
         <>
         <div className='progression'>

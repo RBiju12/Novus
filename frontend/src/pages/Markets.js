@@ -10,6 +10,8 @@ const Markets = () => {
   const [info, setInfo] = useState('')
 
 
+  //Fetches data from openAPI endpoint and displays text from chatbot
+
   const fetchChatBot = React.useCallback(async() => {
     try{
       const res = await axios.get('http://localhost:5000/chatbot');
@@ -21,6 +23,8 @@ const Markets = () => {
       console.error(err)
     }
   }, [info])
+
+  //takes data from api and parses
 
   const fetchData = React.useCallback(async () => {
     try {
@@ -41,7 +45,12 @@ const Markets = () => {
     setInfo('Chat Bot Closed')
   }
 
+  //Stop function that ends chatbot functions
+
   console.log('Market Data:', marketData); 
+
+  //The return function maps over all of the data and displays it in a table format
+  //Also handles the chatbot functionalities for the end user
 
   return (
     <>

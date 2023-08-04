@@ -10,21 +10,23 @@ import time
 import openai
 import psycopg2
 
-openai.api_key = "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"
+openai.api_key = ""
 
 app = Flask(__name__, static_folder='../frontend/build', static_url_path='/')
 CORS(app)
+#Enabled CORS to allow for my api endpoints to be protected and for my backend and frontend to connect
 
 def connect_db():
-    dbname = 'userinfo'
-    user = 'postgres'
-    password = 'rootbiju'
-    host = 'localhost'
-    port = '5432'
+    dbname = ''
+    user = ''
+    password = ''
+    host = ''
+    port = ''
 
     connection = f"dbname={dbname} user={user} password={password} host={host} port={port}"
     conn = psycopg2.connect(connection)
     return conn
+#function to connect to PostgreSQL database
 
 @app.route("/")
 def index():
@@ -55,7 +57,9 @@ def status():
     data = info.json()
 
     return jsonify(data)
-    
+#Send json data to frontend to be extracted
+
+#All 4 of my scraped data endpoints that I parsed and extracted the text using web scraping technologies
 
 @app.route("/scrape1")
 def stories():
@@ -148,6 +152,8 @@ def marketarticles():
 
     else:
         return jsonify(new_scrape4)
+    
+#5 of my graph data points to be rendered on my frontend via the REACT apex charts component
     
 @app.route('/graphdata1')
 def graph():
@@ -249,6 +255,8 @@ def volumes():
     else:
         return jsonify({"volume":vol})
     
+#Selenium endpoint that automates the search of Stock info and price
+    
 @app.route('/automate')
 def automate():
     try:
@@ -261,17 +269,21 @@ def automate():
         driver.get(url)
 
         search_box = driver.find_element(By.CLASS_NAME, 'gLFyf')
+        #Extract the google search engine button and sends a query
 
         search_box.send_keys('Learn more about Stocks')
 
         search_box.submit()
 
         time.sleep(30)
+        #Delays for 30 seconds to visualize the data
 
         driver.quit()
     except Exception as e:
         return f'Error is {e}'
     
+
+#Chatbot endpoint that fetches the openAI data and grabs the responses from Chat GPT and sends to my frontend
 @app.route('/chatbot')
 def chatbot():
     try:
@@ -293,6 +305,10 @@ def chatbot():
         return jsonify({"data": generator})
     except Exception as e:
         return jsonify({"error": str(e)})
+    
+
+#Database endpoint that is a POST request that fetches from my frontend and grabes the firstname, lastname, and email field and 
+#displays in my PostgreSQL database
 
 @app.route('/db', methods=['POST'])
 def database():
@@ -326,7 +342,7 @@ def database():
 
 
     
-    
+#Handles all of my 404 errors
 @app.errorhandler(404)
 def handleerror(e):
     print("Error", {e})
