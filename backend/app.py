@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, send_from_directory
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS 
 import requests
 from bs4 import BeautifulSoup
@@ -8,12 +8,23 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 import time
 import openai
+import psycopg2
 
 openai.api_key = "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"
 
 app = Flask(__name__, static_folder='../frontend/build', static_url_path='/')
 CORS(app)
 
+def connect_db():
+    dbname = 'userinfo'
+    user = 'postgres'
+    password = 'rootbiju'
+    host = 'localhost'
+    port = '5432'
+
+    connection = f"dbname={dbname} user={user} password={password} host={host} port={port}"
+    conn = psycopg2.connect(connection)
+    return conn
 
 @app.route("/")
 def index():
@@ -282,6 +293,37 @@ def chatbot():
         return jsonify({"data": generator})
     except Exception as e:
         return jsonify({"error": str(e)})
+
+@app.route('/db', methods=['POST'])
+def database():
+    try:
+        data = request.get_json()
+
+        print(data)
+
+        firstname = data.get('firstname')
+        lastname = data.get('lastname')
+        email = data.get('email')
+
+        conn = connect_db()
+
+        cursor = conn.cursor()
+
+        query = "INSERT INTO users (firstname, lastname, email) VALUES (%s, %s, %s)"
+
+        cursor.execute(query, (firstname, lastname, email))
+
+        conn.commit()
+
+        cursor.close()
+        
+        conn.close()
+
+        return jsonify({"message", "Data saved"})
+    
+    except Exception as e:
+        return jsonify({"Error": str(e)})
+
 
     
     

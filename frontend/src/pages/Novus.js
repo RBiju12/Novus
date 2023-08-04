@@ -1,7 +1,12 @@
 import Home from './Home.png'
 import './Novus.css'
 import {Card} from 'react-bootstrap'
+import {useEffect} from 'react'
 const Novus = () => {
+
+    useEffect(() => {
+        alert('Welcome to Novus!')
+    }, [])
 
     //const [data, setData] = useState([])
 

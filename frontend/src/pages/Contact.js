@@ -4,6 +4,7 @@ import {Button} from 'react-bootstrap'
 import {TextField} from '@mui/material'
 import {Card} from 'react-bootstrap'
 import './Novus.css'
+import axios from 'axios'
 
 const Contact = () => {
 
@@ -18,7 +19,7 @@ const Contact = () => {
     const [pressed, setPressed] = useState(true)
 
     const fetchEmail = () =>{
-        setEmail('rishanbiju@gmail.com')
+        setEmails('rishanbiju@gmail.com')
     }
 
     useEffect(() => {
@@ -29,18 +30,34 @@ const Contact = () => {
         return () => setTimeout(timer)
     }, [])
 
+
+    const submittoDatabase = async(e) => {
+        try{
+        const response = await axios.post('http://localhost:5000/db', {
+            firstname: firstname,
+            lastname: lastname, 
+            email: email,
+        })
+        console.log(response.data.message);
+    }catch(err){
+        console.error(err)
+    }
+
+    }
+
     const submitvalidate = () => {
-        if(emails.trim().length === 0 || firstname.trim().length === 0 || lastname.trim().length === 0){
+        if(email.trim().length === 0 || firstname.trim().length === 0 || lastname.trim().length === 0){
             alert('Please enter all the fields!')
         }
-        else if(!emails.slice(-9).includes('gmail.com') && !emails.slice(-11).includes('outlook.com')){
+        else if(!email.slice(-9).includes('gmail.com') && !email.slice(-11).includes('outlook.com')){
             alert('Please use Gmail or Outlook')
         }
         else{
-            alert(`Thank you for registering: ${emails}`)
+            submittoDatabase()
+            alert(`Thank you for registering: ${email}`)
             setFirstName('')
             setLastName('')
-            setEmails('')
+            setEmail('')
         }
     }
 
@@ -53,9 +70,9 @@ const Contact = () => {
             Through my expertise in web development and my fascination with the financial markets, I'm creating a user-centric platform that 
             empowers investors to make informed decisions and navigate the complexities of stock analysis with ease. Join me on this exciting 
             journey as we explore the world of stocks together! Feel free to fill out the contact page to recieve updates on stock changes.</p>
-            <br />
             <Button onClick={fetchEmail} className='email'>Click to view my email</Button>
-            {pressed && <p>{email}</p>}
+            {pressed && <p>{emails}</p>}
+            <br />
             <br />
             <br />
         <Card bg='info' style={{top: '20%', left: '50%', transform: 'translate(-50%, -2%)', width: '700px'}}>
@@ -76,7 +93,7 @@ const Contact = () => {
                 <br />
                 <br />
                 <Card.Title>Email Address:</Card.Title>
-                <TextField id="standard-basic" label="Enter your email address" variant="standard" type='text' value={emails} onChange={(e) => setEmails(e.target.value)}/>
+                <TextField id="standard-basic" label="Enter your email address" variant="standard" type='text' value={email} onChange={(e) => setEmail(e.target.value)}/>
                 <br />
                 <br />
                 <br />
